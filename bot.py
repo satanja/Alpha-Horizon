@@ -3,6 +3,7 @@ from discord.ext import commands
 from scraper import getInfo
 import tokenfile
 import leagueColors
+import os
 
 #Constants
 TEAM = "Team Horizon"
@@ -62,4 +63,4 @@ async def amateur():
   color = leagueColors.AMATEUR
   await client.say(embed = generateEmbed(color, 3, TEAM))
 
-client.run(process.env.BOT_TOKEN)
+client.run(os.getenv('BOT_TOKEN'))
