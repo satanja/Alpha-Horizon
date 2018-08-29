@@ -46,7 +46,10 @@ def generateEmbed(color, type, team):
 
 @client.event
 async def on_ready():
-  print ("started")
+  print('Logged in as')
+  print(client.user.name)
+  print(client.user.id)
+  print('------')
 
 @client.command()
 async def pro():
