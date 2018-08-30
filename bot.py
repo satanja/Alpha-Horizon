@@ -12,7 +12,7 @@ client = commands.Bot(command_prefix = '!')
 
 # returns the teams in a string
 def formatTeams(teams):
-  return "**" + teams[0] + " vs " + teams[1] + "**"
+  return teams[0] + " vs " + teams[1]
 
 # returns the information in a string
 def formatInfo(info):
@@ -41,7 +41,7 @@ def generateEmbed(color, type, team):
     desc = formatInfo(details[1])
     maps = formatMaps(details[2])
     embed = discord.Embed(title = title, description = desc, color = color)
-    embed.add_field(name = "**Maps**", value = maps)
+    embed.add_field(name = "Maps", value = maps)
   return embed
 
 @client.event
