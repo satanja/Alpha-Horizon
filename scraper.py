@@ -47,7 +47,6 @@ def findNextTeamMatch(calendar, team):
   else:
     for match in matchList:
       matchstatus = match.find(class_="tablecol colw55").get_text()
-      print(matchstatus)
       if matchstatus == "-":
         # Found an uncompleted match
         # Return url
