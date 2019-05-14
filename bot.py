@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import tokenfile
 import leagueColors
 import os
 import responder
