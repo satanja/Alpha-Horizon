@@ -2,6 +2,7 @@ import scraper
 import discord
 import api
 from match import Match
+import manager
 
 # returns the teams in a string
 def formatTeams(match):
@@ -15,12 +16,18 @@ def formatInfo(match):
 
 
 def formatMaps(match):
+
   result = ""
+  players = manager.get_players()
   for i in range(0, 5):
-    if (i == 4):
-      result += "[ACE]: "
+    
+    if players[i] == None:
+      if (i == 4):
+        result += "[ACE]: "
+      else:
+        result += "[" + str(i + 1) + "]: "
     else:
-      result += "[" + str(i + 1) + "]: "
+      result += players[i] + ": " 
     result += match.maps[i] + "\n"
   return result
 

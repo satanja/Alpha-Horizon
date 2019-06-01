@@ -3,6 +3,7 @@ from discord.ext import commands
 import leagueColors
 import os
 import responder
+import manager
 
 #Constants
 TEAM = "Team Horizon"
@@ -27,6 +28,20 @@ async def semipro():
 @client.command()
 async def amateur():
   color = leagueColors.AMATEUR
+  await client.say(embed = responder.generateMatchEmbed(color, 3))
+
+@client.command(pass_context = True)
+async def claim(context, message):
+  color = leagueColors.AMATEUR
+  author = context.message.author.name
+  manager.set_player(int(message) - 1, author)
+  await client.say(embed = responder.generateMatchEmbed(color, 3))
+
+@client.command(pass_context = True)
+async def remove(context, message):
+  color = leagueColors.AMATEUR
+  author = context.message.author.name
+  manager.remove_player(int(message) - 1, author)
   await client.say(embed = responder.generateMatchEmbed(color, 3))
 
 TOKEN = os.getenv('BOT_TOKEN')
