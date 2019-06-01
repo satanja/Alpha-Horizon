@@ -1,36 +1,41 @@
 import scraper
 import discord
+import api
+from match import Match
 
 # returns the teams in a string
-def formatTeams(teams):
-  return teams[0] + " vs " + teams[1]
+def formatTeams(match):
+  return match.team1 + " vs " + match.team2
 
 # returns the information in a string
-def formatInfo(info):
-  return "\n".join(info)
+def formatInfo(match):
+  desc = "Channel: " + str(match.channel) + "\n"
+  desc += "URL: " + str('https://alpha.tl/match/') + str(match.id)
+  return desc
 
-def formatMaps(maps):
+
+def formatMaps(match):
   result = ""
   for i in range(0, 5):
     if (i == 4):
       result += "[ACE]: "
     else:
       result += "[" + str(i + 1) + "]: "
-    result += maps[i] + "\n"
+    result += match.maps[i] + "\n"
   return result
 
-def generateMatchEmbed(color, type, team):
+def generateMatchEmbed(color, type):
 
-  details = scraper.getInfo(type, team)
+  match = api.get_upcoming()
 
   embed = None
-  if isinstance(details, str):
+  if isinstance(match, str):
     color = 0xff0000
-    embed = discord.Embed(title = details, color = color)
+    embed = discord.Embed(title = match, color = color)
   else:
-    title = formatTeams(details[0])
-    desc = formatInfo(details[1])
-    maps = formatMaps(details[2])
+    title = formatTeams(match)
+    desc = formatInfo(match)
+    maps = formatMaps(match)
     embed = discord.Embed(title = title, description = desc, color = color)
     embed.add_field(name = "Maps", value = maps)
   return embed

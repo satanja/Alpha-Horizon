@@ -22,11 +22,12 @@ def get_upcoming():
     upcoming_match = json.loads(response.text)
 
     channel = upcoming_match["channel"]
+    datetime = upcoming_match["datetime"]
     team1 = upcoming_match["team1"]["name"]
     team2 = upcoming_match["team2"]["name"]
     maps = upcoming_match["maps"]
 
-    result = Match(id, channel, team1, team2, maps)
+    result = Match(id, channel, datetime, team1, team2, maps)
 
     # print(upcoming_match)
     return result
