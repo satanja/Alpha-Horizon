@@ -19,16 +19,15 @@ async def on_ready():
 @client.command()
 async def pro():
   color = leagueColors.PRO
-  await client.say(embed = responder.generateMatchEmbed(color, 1, TEAM))
 
 @client.command()
 async def semipro():
   color = leagueColors.SEMIPRO
-  await client.say(embed = responder.generateMatchEmbed(color, 2, TEAM))
 
 @client.command()
 async def amateur():
   color = leagueColors.AMATEUR
-  await client.say(embed = responder.generateMatchEmbed(color, 3, TEAM))
+  await client.say(embed = responder.generateMatchEmbed(color, 3))
 
-client.run(os.getenv('BOT_TOKEN'))
+TOKEN = os.getenv('BOT_TOKEN')
+client.run(TOKEN)
