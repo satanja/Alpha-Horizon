@@ -10,9 +10,9 @@ def formatTeams(match):
 
 # returns the information in a string
 def formatInfo(match):
-  desc = "Channel: " + str(match.channel) + "\n"
-  desc += "URL: " + str('https://alpha.tl/match/') + str(match.id)
-  return desc
+  url = 'https://alpha.tl/match/' + str(match.id)
+  info = scraper.getBasicInfo(url)
+  return "\n".join(info)
 
 
 def formatMaps(match):
