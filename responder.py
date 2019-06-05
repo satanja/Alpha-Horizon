@@ -34,15 +34,15 @@ def formatMaps(match):
 def generateMatchEmbed(color, type):
 
   match = api.get_upcoming()
-
-  embed = None
-  if isinstance(match, str):
-    color = 0xff0000
-    embed = discord.Embed(title = match, color = color)
+  if match == None:
+    title = 'Error'
+    desc = 'No upcoming match found. Please wait until the next match becomes available.'
+    embed = discord.Embed(title = title, description = desc, color = color)
+    return embed
   else:
     title = formatTeams(match)
     desc = formatInfo(match)
     maps = formatMaps(match)
     embed = discord.Embed(title = title, description = desc, color = color)
     embed.add_field(name = "Maps", value = maps)
-  return embed
+    return embed

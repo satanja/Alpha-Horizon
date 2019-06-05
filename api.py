@@ -16,6 +16,8 @@ def get_upcoming():
         if match["team1"]["id"] == 61 or match["team2"]["id"] == 61:
             id = match["id"]
     
+    if id == None:
+        return None
 
     match_url = MATCH_PREFIX + str(id)
     response = requests.get(match_url)
