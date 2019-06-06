@@ -15,7 +15,7 @@ def set_player(map_id, player):
     global saved_match
 
     new_match = api.get_upcoming()
-    if saved_match['id'] != new_match.id and new_match != None:
+    if new_match != None and saved_match['id'] != new_match.id:
         saved_match['id'] = new_match.id
         saved_match['claims'] = [None] * 5
 
