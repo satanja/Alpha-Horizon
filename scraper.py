@@ -32,7 +32,11 @@ def getCalendar(url):
 # if no matches found: return 0
 # if no matches remaining: return 1
 # if there exists a match to be played: return url
-def findNextTeamMatch(calendar, team):
+def findNextTeamMatch():
+  url = URL + tournamentSelect(3)
+  calendar = getCalendar(url)
+  team = 'Team Ħorizon'
+
   matchList = []
   # find all instances of the matches the team has to play
   for entry in calendar:
@@ -49,8 +53,8 @@ def findNextTeamMatch(calendar, team):
       matchstatus = match.find(class_="tablecol colw55").get_text()
       if matchstatus == "-":
         # Found an uncompleted match
-        # Return url
-        return match['href']
+        # Return id
+        return int(match['href'][-4:])
     # No uncompleted match remaining
     return 1
 
@@ -83,29 +87,3 @@ def getMaps(url):
     mapString = string.capwords(mapElement.get_text().lower())
     maps.append(mapString)
   return maps
-
-# Returns all the information of the next match the team has to play
-# if there exists a next match:
-#   details[0] contains the teams
-#   details[1] contains the basic info of the match (date, time, etc)
-#   details[2] contains the maps
-# otherwise:
-#   return a string
-def getInfo(type, team):
-  #navigate to the tournament page
-  if (type < 1 or type > 3):
-    print("Invalid type")
-  else: 
-    url = URL + tournamentSelect(type)
-    calendarPage = getCalendar(url)
-    nextMatch = findNextTeamMatch(calendarPage, team)
-    if nextMatch == 0:
-      return "Your team is not signed up"
-    elif nextMatch == 1:
-      return "No matches remain to be played"
-    else:
-      details = []
-      details.append(getTeams(nextMatch))
-      details.append(getBasicInfo(nextMatch))
-      details.append(getMaps(nextMatch))
-      return details

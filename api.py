@@ -1,10 +1,11 @@
 import requests
 import json
+import scraper
 from match import Match
 
 UPCOMING = 'https://alpha.tl/api?upcomingmatches'
 MATCH_PREFIX = 'https://alpha.tl/api?match=' 
-TEAM_ID = 61
+TEAM_ID = 85
 
 def get_upcoming():
     
@@ -18,6 +19,9 @@ def get_upcoming():
             id = match["id"]
     
     if id == None:
+        id = scraper.findNextTeamMatch()
+    
+    if id == 0 or id == 1: 
         return None
 
     match_url = MATCH_PREFIX + str(id)
