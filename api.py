@@ -5,7 +5,7 @@ from match import Match
 
 UPCOMING = 'https://alpha.tl/api?upcomingmatches'
 MATCH_PREFIX = 'https://alpha.tl/api?match=' 
-TEAM_ID = 85
+TEAM_ID = 61
 
 def get_upcoming():
     
