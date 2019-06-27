@@ -18,7 +18,7 @@ async def on_ready():
   print('------')
 
 @client.command()
-async def pro():
+async def pro(ctx):
   color = leagueColors.PRO
 
 @client.command()
@@ -26,23 +26,23 @@ async def semipro():
   color = leagueColors.SEMIPRO
 
 @client.command()
-async def amateur():
+async def amateur(ctx):
   color = leagueColors.AMATEUR
-  await client.say(embed = responder.generateMatchEmbed(color, 3))
+  await ctx.send(embed = responder.generateMatchEmbed(color, 3))
 
-@client.command(pass_context = True)
+@client.command()
 async def claim(context, message):
   color = leagueColors.AMATEUR
   author = context.message.author.name
   manager.set_player(int(message) - 1, author)
-  await client.say(embed = responder.generateMatchEmbed(color, 3))
+  await context.send(embed = responder.generateMatchEmbed(color, 3))
 
-@client.command(pass_context = True)
+@client.command()
 async def remove(context, message):
   color = leagueColors.AMATEUR
   author = context.message.author.name
   manager.remove_player(int(message) - 1, author)
-  await client.say(embed = responder.generateMatchEmbed(color, 3))
+  await context.send(embed = responder.generateMatchEmbed(color, 3))
 
 TOKEN = os.getenv('BOT_TOKEN')
 client.run(TOKEN)
