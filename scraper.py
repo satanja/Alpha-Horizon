@@ -73,7 +73,7 @@ def getBasicInfo(url):
   matchPage = soupify(url)
   info = []
   infoElements = list(matchPage.find_all(class_="matchinfo-info"))
-  for i in range(0, 3):
+  for i in range(3):
     info.append(infoElements[i].get_text())
   info.append(url)
   return info

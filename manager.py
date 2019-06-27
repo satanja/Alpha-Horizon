@@ -2,20 +2,20 @@ import api
 import json
 from match import Match
 
-with open('match.json') as file:
-    data = file.read()
+with open('match.json') as match_file:
+    data = match_file.read()
 
 saved_match = json.loads(data)
 
 def save_data(): 
     with open('match.json', 'w') as outfile:
-        json.dump(saved_match, outfile)
+        json.dump(saved_match, outfile, indent=4)
 
 def set_player(map_id, player):
     global saved_match
 
     new_match = api.get_upcoming()
-    if new_match != None and saved_match['id'] != new_match.id:
+    if new_match is not None and saved_match['id'] != new_match.id:
         saved_match['id'] = new_match.id
         saved_match['claims'] = [None] * 5
 

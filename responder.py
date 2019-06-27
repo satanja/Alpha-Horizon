@@ -6,11 +6,11 @@ import manager
 
 # returns the teams in a string
 def formatTeams(match):
-  return match.team1 + " vs " + match.team2
+  return "{} vs {}".format(match.team1, match.team2)
 
 # returns the information in a string
 def formatInfo(match):
-  url = 'https://alpha.tl/match/' + str(match.id)
+  url = 'https://alpha.tl/match/{}'.format(match.id)
   info = scraper.getBasicInfo(url)
   return "\n".join(info)
 
@@ -19,13 +19,13 @@ def formatMaps(match):
 
   result = ""
   players = manager.get_players()
-  for i in range(0, 5):
+  for i in range(5):
     
     if players[i] == None:
       if (i == 4):
         result += "[ACE]: "
       else:
-        result += "[" + str(i + 1) + "]: "
+        result += "[{}]".format(i + 1)
     else:
       result += players[i] + ": " 
     result += match.maps[i] + "\n"
