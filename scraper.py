@@ -12,9 +12,17 @@ def tournamentSelect(type):
   switcher = {
     1: "europro",
     2: "eurosemipro",
-    3: "euroamateur"
+    3: "euroamateur",
+    4: "eurookie"
   }
   return switcher.get(type, "invalid tournament type")
+
+def teamSelect(teamId):
+    switcher = {
+        61: 'Team Ħorizon',
+        100: 'Team Horizon Academy',
+    }
+    return switcher.get(type, "invalid teamId")
 
 # parses the webpage using BeautifulSoup
 def soupify(url):
@@ -32,10 +40,10 @@ def getCalendar(url):
 # if no matches found: return 0
 # if no matches remaining: return 1
 # if there exists a match to be played: return url
-def findNextTeamMatch():
-  url = URL + tournamentSelect(3)
+def findNextTeamMatch(teamId, type):
+  url = URL + tournamentSelect(type)
   calendar = getCalendar(url)
-  team = 'Team Ħorizon'
+  team = teamSelect(teamId)
 
   matchList = []
   # find all instances of the matches the team has to play

@@ -1,14 +1,14 @@
 import requests
 import json
 import scraper
+import manager
 from typing import Union
 from match import Match
 
 UPCOMING = "https://alpha.tl/api?upcomingmatches"
 MATCH_PREFIX = "https://alpha.tl/api"
-TEAM_ID = 61
 
-def get_upcoming() -> Union[Match, None]:
+def get_upcoming(teamId, type) -> Union[Match, None]:
     
     response = requests.get(UPCOMING)
     upcoming_matches = json.loads(response.text)
@@ -16,11 +16,11 @@ def get_upcoming() -> Union[Match, None]:
     match_id = None
 
     for match in upcoming_matches:
-        if match["team1"]["id"] == TEAM_ID or match["team2"]["id"] == TEAM_ID:
+        if match["team1"]["id"] == teamId or match["team2"]["id"] == teamId:
             match_id = match["id"]
     
     if match_id == None:
-        match_id = scraper.findNextTeamMatch()
+        match_id = scraper.findNextTeamMatch(teamId, type)
     
     if match_id in [0, 1]: 
         return None
@@ -37,7 +37,12 @@ def get_upcoming() -> Union[Match, None]:
     maps = upcoming_match["maps"]
 
     result = Match(match_id, channel, datetime, team1, team2, maps)
-
+    
+    # manager.load_saved_match()
+    # if manager.is_new_match(result):
+    #     print("clearing...")
+    #     manager.clear_saved_match(result.id)
+        
     # print(upcoming_match)
     return result
     

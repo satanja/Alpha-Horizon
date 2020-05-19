@@ -25,17 +25,17 @@ def formatMaps(match):
       if (i == 4):
         result += "[ACE]: "
       else:
-        result += "[{}]".format(i + 1)
+        result += "[{}]: ".format(i + 1)
     else:
       result += players[i] + ": " 
     result += match.maps[i] + "\n"
   return result
 
-def generateMatchEmbed(color, type):
+def generateMatchEmbed(color, teamId, type):
 
-  match = api.get_upcoming()
+  match = api.get_upcoming(teamId, type)
   if match == None:
-    title = 'Error'
+    title = 'Error' + str(teamId)
     desc = 'No upcoming match found. Please wait until the next match becomes available.'
     embed = discord.Embed(title = title, description = desc, color = color)
     return embed
