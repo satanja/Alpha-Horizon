@@ -8,7 +8,7 @@ from match import Match
 UPCOMING = "https://alpha.tl/api?upcomingmatches"
 MATCH_PREFIX = "https://alpha.tl/api"
 
-def get_upcoming(teamId, type) -> Union[Match, None]:
+def get_upcoming(teamId, type, manager) -> Union[Match, None]:
     
     response = requests.get(UPCOMING)
     upcoming_matches = json.loads(response.text)
@@ -38,10 +38,9 @@ def get_upcoming(teamId, type) -> Union[Match, None]:
 
     result = Match(match_id, channel, datetime, team1, team2, maps)
     
-    # manager.load_saved_match()
-    # if manager.is_new_match(result):
-    #     print("clearing...")
-    #     manager.clear_saved_match(result.id)
+    if manager.is_new_match(result):
+        print("clearing...")
+        manager.clear_saved_match(result.id)
         
     # print(upcoming_match)
     return result

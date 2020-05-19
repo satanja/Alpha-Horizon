@@ -6,10 +6,10 @@ class Manager:
     def __init__(self, teamId):
         self.teamId = teamId
         self.players = [None] * 5
-        self.lastMatchId = 0
+        self.match = None 
 
-    def is_new_match(self):
-        print("not implemented")
+    def is_new_match(self, new_match):
+        return new_match is not None and self.match.id != new_match.id
 
     def set_player(self, map_id, player):
         self.players[map_id] = player
@@ -22,6 +22,7 @@ class Manager:
 
     def print(self):
         print(self.teamId)
+
 saved_match = None
 
 # def load_saved_match():

@@ -33,7 +33,7 @@ def formatMaps(match, manager):
 
 def generateMatchEmbed(color, teamId, type, manager):
 
-  match = api.get_upcoming(teamId, type)
+  match = api.get_upcoming(teamId, type, manager)
   if match == None:
     title = 'Error' + str(teamId)
     desc = 'No upcoming match found. Please wait until the next match becomes available.'
