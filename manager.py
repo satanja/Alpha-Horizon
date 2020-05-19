@@ -8,19 +8,20 @@ class Manager:
         self.players = [None] * 5
         self.lastMatchId = 0
 
-    def is_new_match():
+    def is_new_match(self):
         print("not implemented")
 
-    def set_player(map_id, player):
+    def set_player(self, map_id, player):
         self.players[map_id] = player
 
-    def get_players():
+    def get_players(self):
         return self.players
     
-    def clear_saved_match():
+    def clear_saved_match(self):
         self.players = [None] * 5
 
-
+    def print(self):
+        print(self.teamId)
 saved_match = None
 
 # def load_saved_match():

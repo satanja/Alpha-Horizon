@@ -15,7 +15,7 @@ def formatInfo(match):
   return "\n".join(info)
 
 
-def formatMaps(match):
+def formatMaps(match, manager):
 
   result = ""
   players = manager.get_players()
@@ -31,7 +31,7 @@ def formatMaps(match):
     result += match.maps[i] + "\n"
   return result
 
-def generateMatchEmbed(color, teamId, type):
+def generateMatchEmbed(color, teamId, type, manager):
 
   match = api.get_upcoming(teamId, type)
   if match == None:
@@ -42,7 +42,7 @@ def generateMatchEmbed(color, teamId, type):
   else:
     title = formatTeams(match)
     desc = formatInfo(match)
-    maps = formatMaps(match)
+    maps = formatMaps(match, manager)
     embed = discord.Embed(title = title, description = desc, color = color)
     embed.add_field(name = "Maps", value = maps)
     return embed

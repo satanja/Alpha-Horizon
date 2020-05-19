@@ -44,7 +44,7 @@ def findNextTeamMatch(teamId, type):
   url = URL + tournamentSelect(type)
   calendar = getCalendar(url)
   team = teamSelect(teamId)
-
+  
   matchList = []
   # find all instances of the matches the team has to play
   for entry in calendar:

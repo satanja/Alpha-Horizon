@@ -3,12 +3,14 @@ from discord.ext import commands
 import leagueColors
 import os
 import responder
-import manager
+from manager import Manager
 
 #Constants
 TEAM = "Team Horizon"
 
 client = commands.Bot(command_prefix = '!')
+semipro_manager = Manager(61)
+rookie_manager = Manager(100)
 
 @client.event
 async def on_ready():
@@ -18,38 +20,30 @@ async def on_ready():
   print('------')
 
 @client.command()
-async def pro(ctx):
+async def pro(context):
   color = leagueColors.PRO
 
 @client.command()
-async def semipro(ctx):
+async def semipro(context, *args):
   color = leagueColors.SEMIPRO
-  await ctx.send(embed = responder.generateMatchEmbed(color, 61, 2))
+  if len(args) != 0:
+    author = context.message.author.name
+    index = int(args[0]) - 1
+    semipro_manager.set_player(index, author)
+  await context.send(embed = responder.generateMatchEmbed(color, 61, 2, semipro_manager))
 
 @client.command()
-async def amateur(ctx):
-  color = leagueColors.AMATEUR
-  await ctx.send(embed = responder.generateMatchEmbed(color, 0, 3))
+async def amateur(context, *args):
+    print('not implemented')
 
 @client.command()
-async def rookie(ctx):
+async def rookie(context, *args):
   color = leagueColors.ROOKIE
-  await ctx.send(embed = responder.generateMatchEmbed(color, 100, 4))
-
-@client.command()
-async def claimSemiPro(context, message):
-  color = leagueColors.SEMIPRO
-
-
-@client.command()
-async def claimRookie(context, message):
-  color = leagueColors.ROOKIE
-
-
-@client.command()
-async def remove(context, message):
-  color = leagueColors.ROOKIE
-
+  if len(args) != 0:
+    author = context.message.author.name
+    index = int(args[0]) - 1
+    rookie_manager.set_player(index, author)
+  await context.send(embed = responder.generateMatchEmbed(color, 100, 4, rookie_manager))
 
 TOKEN = os.getenv('BOT_TOKEN')
 client.run(TOKEN)
