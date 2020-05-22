@@ -40,7 +40,7 @@ def get_upcoming(teamId, type, manager) -> Union[Match, None]:
     
     if manager.is_new_match(result):
         print("clearing...")
-        manager.clear_saved_match(result.id)
+        manager.clear_saved_match(result)
         
     # print(upcoming_match)
     return result

@@ -22,7 +22,7 @@ def teamSelect(teamId):
         61: 'Team Ħorizon',
         100: 'Team Horizon Academy',
     }
-    return switcher.get(type, "invalid teamId")
+    return switcher.get(teamId, "invalid teamId")
 
 # parses the webpage using BeautifulSoup
 def soupify(url):

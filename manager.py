@@ -9,6 +9,8 @@ class Manager:
         self.match = None 
 
     def is_new_match(self, new_match):
+        if self.match == None:
+            return True
         return new_match is not None and self.match.id != new_match.id
 
     def set_player(self, map_id, player):
@@ -17,7 +19,8 @@ class Manager:
     def get_players(self):
         return self.players
     
-    def clear_saved_match(self):
+    def clear_saved_match(self, match):
+        self.match = match
         self.players = [None] * 5
 
     def print(self):
